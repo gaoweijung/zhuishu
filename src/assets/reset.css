@@ -1,0 +1,23 @@
+.clearfix::before,
+.clearfix::after{
+    content: "";
+    display: block;
+    overflow: hidden;
+    clear: borh;
+    visibility: hidden;
+}
+.container{
+    display: block;
+    width: 1200px;
+    margin: 0 auto;
+}
+.red{
+    color: red;
+}
+.split{
+    padding: 0 10px;
+}
+a{
+    text-decoration: none;
+    color: #666;
+}
