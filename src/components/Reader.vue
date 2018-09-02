@@ -144,10 +144,6 @@ export default {
 h3 {
   text-align: center;
 }
-.forward-chap,
-.next-chap {
-  margin: 20px 250px;
-}
 .catalog {
   position: absolute;
   width: 550px;

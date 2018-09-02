@@ -1,23 +1,58 @@
 .clearfix::before,
-.clearfix::after{
+.clearfix::after {
     content: "";
     display: block;
     overflow: hidden;
-    clear: borh;
+    clear: both;
     visibility: hidden;
 }
-.container{
-    display: block;
-    width: 1200px;
+
+.container {
+    width: 80%;
     margin: 0 auto;
 }
-.red{
+
+.red {
     color: red;
 }
-.split{
+
+.split {
     padding: 0 10px;
 }
-a{
+
+a {
     text-decoration: none;
     color: #666;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-size: 62.5%;
+}
+
+body {
+    font-family: PingFangSC-Regular, HelveticaNeue-Light, "Helvetica Neue Light",
+        "Microsoft YaHei", sans-serif;
+    color: #333;
+    font-weight: 400;
+    line-height: 1;
+    font-size: 1.4rem;
+    -webkit-font-soothing: antialiased;
+    background: #fbfaf8;
+}
+.container{
+    width: 80%;
+}
+@media (max-width : 600px){
+    .container{
+        width: 100%;
+    }
 }

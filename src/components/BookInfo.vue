@@ -1,18 +1,22 @@
 <template>
   <div id="book-info" class="container">
     <div class="center">
-      <img :src="imgURL" :tiltle="book.title">
-      <div class="info">
-        <h1 class="name">{{ book.title }}</h1>
-        <p class="author">
-          <span class="book-author">{{ book.author }}</span>
-          <span class="split">|</span>
-          <span class="minorCate">{{ book.minorCate }}</span>
-          <span class="split">|</span>
-          <span class="wordCount">{{ wordCount }}</span>
-        </p>
-        <p class="updated-time">{{ updatedTime }}</p>
-        <router-link :to="{ name: 'reader',params: { bookid: bookId}}" class="read">开始阅读</router-link>
+      <div class="follow">
+        <img :src="imgURL" :tiltle="book.title">
+        <div class="info">
+          <h3 class="name">{{ book.title }}</h3>
+          <p class="author">
+            <span class="book-author">{{ book.author }}</span>
+            <span class="split">|</span>
+            <span class="minorCate">{{ book.minorCate }}</span>
+            <span class="split">|</span>
+            <span class="wordCount">{{ wordCount }}</span>
+          </p>
+          <p class="updated-time">{{ updatedTime }}</p>
+        </div>
+      </div>
+      <div class="btn">
+        <button @click="read()">开始阅读</button>
         <button @click="addOrDelete" :class="isFollowed ? 'b-grey' : 'b-red'">{{ isFollowedContent }}</button>
       </div>
       <div class="book-data">
@@ -44,7 +48,7 @@ export default {
     return {
       bookId: "",
       book: {},
-      isFollowed: null,
+      isFollowed: null
     };
   },
   computed: {
@@ -61,12 +65,11 @@ export default {
     imgURL() {
       return "http://statics.zhuishushenqi.com" + this.book.cover;
     },
-    isFollowedContent(){
-      if(this.isFollowed){
-        return '取消收藏';
-      }
-      else{
-        return '加入收藏';
+    isFollowedContent() {
+      if (this.isFollowed) {
+        return "取消收藏";
+      } else {
+        return "加入收藏";
       }
     }
   },
@@ -97,6 +100,14 @@ export default {
         this.isFollowed = !this.isFollowed;
         util.setLocalData("myfollowbook", localShelf);
       }
+    },
+    read(){
+      this.$router.push({
+        name: 'reader',
+        params: {
+          bookid: this.bookId
+        }
+      })
     }
   },
   created() {
@@ -107,78 +118,138 @@ export default {
 </script>
 
 <style scoped>
-#book-info {
-  background-color: #fff;
-  margin: 30px auto;
-  padding: 30px 0 0 30px;
-}
-.center {
-  width: 380px;
-  margin: 0 auto;
-}
-img {
-  float: left;
-  width: 90px;
-  height: 120px;
-  border: 1px solid #ebebeb;
-  border-radius: 10px;
-  box-shadow: 0 5px 10px #666;
-}
-.book-data {
-  clear: left;
-}
-.name {
-  color: #333;
+@media (min-width: 380px) {
+  #book-info {
+    background-color: #fff;
+    margin: 30px auto;
+    padding: 30px 0 0 30px;
+  }
+  .center {
+    width: 380px;
+    margin: 0 auto;
+  }
+  img {
+    float: left;
+    width: 90px;
+    height: 120px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px #666;
+  }
+  .book-data {
+    clear: left;
+  }
+  .name {
+    color: #333;
 
-  padding: 5px 0;
+    padding: 5px 0;
+  }
+  .info {
+    margin-left: 115px;
+  }
+  .info > h1 {
+    display: inline-block;
+  }
+  .book-author,
+  .updated-time {
+    height: 28px;
+    line-height: 28px;
+  }
+  .book-data {
+    margin-top: 20px;
+  }
+  .book-data > div {
+    display: inline-block;
+    width: 32%;
+    vertical-align: middle;
+    text-align: center;
+  }
+  .book-data > div > span {
+    display: block;
+    height: 25px;
+    line-height: 25px;
+  }
+  .read,
+  button {
+    display: inline-block;
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 15px;
+  }
+  .read {
+    background-color: red;
+  }
+  button {
+    border: none;
+    margin-left: 5px;
+  }
+  .b-grey {
+    background-color: #666;
+  }
+  .b-red {
+    background: red;
+  }
 }
-.info {
-  margin-left: 115px;
-}
-.info > h1 {
-  display: inline-block;
-}
-.book-author,
-.updated-time {
-  height: 28px;
-  line-height: 28px;
-}
-.book-data {
-  margin-top: 20px;
-}
-.book-data > div {
-  display: inline-block;
-  width: 32%;
-  vertical-align: middle;
-  text-align: center;
-}
-.book-data > div > span {
-  display: block;
-  height: 25px;
-  line-height: 25px;
-}
-.read,
-button{
-  display: inline-block;
-  width: 120px;
-  height: 30px;
-  line-height: 30px;
-  color: #fff; 
-  text-align: center;
-  vertical-align: middle;
-  border-radius: 15px;
-}
-.read{
-  background-color: red;
-}
-button{
-  border: none;
-  margin-left: 5px;
-}
-.b-grey{
-  background-color: #666;
-}
-.b-red{
-  background: red;
+@media (max-width: 380px) {
+  #book-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 3%;
+  }
+  .center {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .follow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  img {
+    width: 90px;
+    height: 120px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px #666;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 15px 0;
+  }
+  .btn button {
+    width: 45%;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #70cdef;
+    background-color: #70cdef;
+    color: #fff;
+    outline: none;
+  }
+  .book-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .book-data > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .book-data span {
+    padding: 5px 0;
+  }
 }
 </style>

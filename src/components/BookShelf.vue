@@ -39,17 +39,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+ul{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 li{
-  display: inline-block;
+  width: 25%;
   text-align: center;
-  margin: 20px;
   cursor: pointer;
+  margin: 20px 0;
 }
 img {
-  display: block;
   width: 90px;
   height: 120px;
-  border: 1px solid #ebebeb;
   border-radius: 10px;
   box-shadow: 0 5px 10px #555;
 }

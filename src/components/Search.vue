@@ -1,8 +1,10 @@
 <template>
-    <div Id="search">
+    <div id="search">
         <input class="search-input" type="text" placeholder="搜索书名或者作者" v-model="keyword">
-        <router-link :to="{ name: 'search',params: { keyword: keyword}}"
-        class="search-btn"></router-link>
+        <button @click="search()">
+          <i></i>
+          搜索
+        </button>
     </div>
 </template>
 
@@ -14,31 +16,52 @@ export default {
       keyword: ""
     };
   },
-  methods: {},
-  mounted() {}
+  methods: {
+    search(){
+      this.$router.push({
+        name: 'search',
+        params: {
+          keyword: this.keyword
+        }
+      })
+    }
+  }
+ 
 };
 </script>
 
 <style scoped>
-.search-input {
-  color: #666;
-  width: 260px;
-  height: 100%;
-  line-height: 40px;
-  padding-left: 10px;
-  border: 0 none;
-  box-sizing: border-box;
-  background: #f2f2f2;
-  outline: none;
-}
-.search-btn {
-  float: right;
-  width: 40px;
-  height: 40px;
-  background-color: #cab389;
-  background-image: url(../assets/icon/search.png);
-  background-repeat: no-repeat;
-  background-position: center center;
-  cursor: pointer;
-}
+  #search{
+    position: relative;
+    width: 30%;
+  }
+  @media (max-width: 600px) {
+    #search{
+      width: 80%;
+    }
+  }
+  input{
+    box-sizing: border-box;
+    width: 100%;
+    height: 34px;
+    padding: 6px 30% 6px 5%;
+    color: #999;
+    font-size: 1.2rem;
+    border: 1px solid #d82626;
+    border-radius: 34px;
+    outline: none;
+  }
+  button{
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: #ffffff;
+    background-color: #d82626;
+    border: 1px solid #d82626;
+    outline: none;
+  }
 </style>
